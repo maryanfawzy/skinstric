@@ -36,8 +36,8 @@ const Navbar = () => {
         <ul className="hidden md:flex space-x-10 text-black font-medium text-sm">
           <li><a href="/" className="hover:text-gray-500 transition">Home</a></li>
           <li><a href="/about" className="hover:text-gray-500 transition">About</a></li>
-          <li><a href="/services" className="hover:text-gray-500 transition">Services</a></li>
-          <li><a href="/contact" className="hover:text-gray-500 transition">Contact</a></li>
+          <li><a href="/services" className="hover:text-red-500 transition text-red-700">Services</a></li>
+          <li><a href="/contact" className="hover:text-gray-500 transition  text-blue-500">Contact</a></li>
         </ul>
       </div>
     </motion.nav>
