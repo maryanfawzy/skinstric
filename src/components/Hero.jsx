@@ -109,118 +109,123 @@
 
 
 
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+// import { motion } from "framer-motion";
+// import { Link } from "react-router-dom";
+// import { useState } from "react";
 
-const Hero = () => {
-  const [isHovered, setIsHovered] = useState(false);
+// const Hero = () => {
+//   const [isHovered, setIsHovered] = useState(false);
 
-  return (
-    <section className="relative flex flex-col items-center justify-center h-screen bg-gray-100 overflow-hidden">
+//   return (
+//     <section className="relative flex flex-col items-center justify-center h-screen bg-gray-100 overflow-hidden">
       
-      <div className="absolute inset-0 flex items-center justify-center opacity-50">
-        <img
-          src="/images/hero-bg.png" 
-          alt="Background"
-          className="w-full h-full object-cover"
-        />
-      </div>
+//       <div className="absolute inset-0 flex items-center justify-center opacity-50">
+//         <img
+//           src="/images/hero-bg.png" 
+//           alt="Background"
+//           className="w-full h-full object-cover"
+//         />
+//       </div>
 
-      {/* Animated Heading */}
-      <motion.h1
-        initial={{ x: 0 }}
-        animate={{ x: isHovered ? -100 : 0 }} // Move left on hover
-        transition={{ duration: 0.8}}
-        className="text-6xl md:text-8xl font-bold text-black text-center relative"
-      >
-        Sophisticated <br />
-        <span className="underline decoration-black">Skincare</span>
-      </motion.h1>
+//       {/* Animated Heading */}
+//       <motion.h1
+//         initial={{ x: 0 }}
+//         animate={{ x: isHovered ? -100 : 0 }} // Move left on hover
+//         transition={{ duration: 0.8}}
+//         className="text-6xl md:text-8xl font-bold text-black text-center relative"
+//       >
+//         Sophisticated <br />
+//         <span className="underline decoration-black">Skincare</span>
+//       </motion.h1>
 
-      {/* Dynamic Dotted Border */}
-
-
-      <div className="absolute bottom-10 w-full px-10 max-w-7xl flex justify-between text-gray-700 text-sm md:text-base">
-        <p className="w-1/6 font-semibold">
-          Premium Custom Skincare For <br /> Faces With Sophisticated Needs
-        </p>
-        <p className="w-1/6 text-center">
-         Proprietary Algorithms For <br /> Effective Formula Design
-       </p>
-       <p className="w-1/6 text-center">
-         Complete Control over <br /> Skincare Ingredients
-        </p>
-        <p className="w-1/6 text-center">
-          Expert clinical <br /> diagnostics + guidance
-       </p>
-       <p className="w-1/6 text-center">
-          Fully Customizable <br /> from Scratch
-        </p>
-        <p className="w-1/6 text-right">
-          FDA / TGA Approved <br /> Compound Pharmacies
-        </p>
-      </div>
+//       {/* Dynamic Dotted Border */}
 
 
-      <motion.div 
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.2 }}
-        className="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm"
-      >
-        <div className="border border-gray-400 p-2 flex items-center">
-          <span className="mr-2">◀</span> CLINICAL RESEARCH
-        </div>
-        </motion.div>
+//       <div className="absolute bottom-10 w-full px-10 max-w-7xl flex justify-between text-gray-700 text-sm md:text-base">
+//         <p className="w-1/6 font-semibold">
+//           Premium Custom Skincare For <br /> Faces With Sophisticated Needs
+//         </p>
+//         <p className="w-1/6 text-center">
+//          Proprietary Algorithms For <br /> Effective Formula Design
+//        </p>
+//        <p className="w-1/6 text-center">
+//          Complete Control over <br /> Skincare Ingredients
+//         </p>
+//         <p className="w-1/6 text-center">
+//           Expert clinical <br /> diagnostics + guidance
+//        </p>
+//        <p className="w-1/6 text-center">
+//           Fully Customizable <br /> from Scratch
+//         </p>
+//         <p className="w-1/6 text-right">
+//           FDA / TGA Approved <br /> Compound Pharmacies
+//         </p>
+//       </div>
 
 
-      <motion.div
-        className="absolute w-[250px] h-[250px] border border-dotted border-gray-400 rotate-90 "
-     
-        initial={{ opacity: 1, scale: 1 }}
-        animate={{ opacity: isHovered ? 1 : 0.8, scale: isHovered ? 1.2 : 1 }}
-        transition={{ duration: 0.5 }}
-        style={{ right: "-5%", top: "30%", transform: "translateY(-50%) " }}
-        // style={{ right: "-1%", top: "40%", clipPath: 'polygon(50% 0, 100% 0, 100% 50%, 50% 100%, 0 100%, 0 50%)' }}
-      >
-        {/* Additional Dotted Borders on Hover */}
-        {isHovered && (
-          <>
-            <motion.div
-              className="absolute w-full h-full border border-dotted border-gray-400"
-              initial={{ opacity: 0, scale: 1 }}
-              animate={{ opacity: 1, scale: 1.3 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            ></motion.div>
-            <motion.div
-              className="absolute w-full h-full border border-dotted border-gray-400"
-              initial={{ opacity: 0, scale: 1 }}
-              animate={{ opacity: 1, scale: 1.6 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            ></motion.div>
-          </>
+//       <motion.div 
 
-        )}
+
+//         initial={{ opacity: 0, x: -50 }}
+//         animate={{ opacity: 1, x: 0 }}
+//         transition={{ duration: 1.2 }}
+
+
+//         className="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm"
+//       >
+//         <div className="border border-gray-400 p-2 flex items-center">
+//           <span className="mr-2">◀</span> CLINICAL RESEARCH
+//         </div>
         
-      </motion.div>
+//         </motion.div>
 
-      {/* Hoverable "Let's Begin" Button */}
-      <Link
-        to="/introduction"
-        className="absolute right-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <div className="border border-gray-400 p-2 flex items-center">
-          LET'S BEGIN <span className="ml-2">▶</span>
-        </div>
-      </Link>
-    </section>
-  );
-};
 
-export default Hero;
+//       <motion.div
+//         className="absolute w-[250px] h-[250px] border border-dotted border-gray-400 rotate-90 "
+     
+//         initial={{ opacity: 1, scale: 1 }}
+//         animate={{ opacity: isHovered ? 1 : 0.8, scale: isHovered ? 1.2 : 1 }}
+//         transition={{ duration: 0.5 }}
+//         style={{ right: "-5%", top: "30%", transform: "translateY(-50%) " }}
+//         // style={{ right: "-1%", top: "40%", clipPath: 'polygon(50% 0, 100% 0, 100% 50%, 50% 100%, 0 100%, 0 50%)' }}
+//       >
+//         {/* Additional Dotted Borders on Hover */}
+//         {isHovered && (
+//           <>
+//             <motion.div
+//               className="absolute w-full h-full border border-dotted border-gray-400"
+//               initial={{ opacity: 0, scale: 1 }}
+//               animate={{ opacity: 1, scale: 1.3 }}
+//               transition={{ duration: 0.5, delay: 0.1 }}
+//             ></motion.div>
+//             <motion.div
+//               className="absolute w-full h-full border border-dotted border-gray-400"
+//               initial={{ opacity: 0, scale: 1 }}
+//               animate={{ opacity: 1, scale: 1.6 }}
+//               transition={{ duration: 0.5, delay: 0.2 }}
+//             ></motion.div>
+//           </>
+
+//         )}
+        
+//       </motion.div>
+
+//       {/* Hoverable "Let's Begin" Button */}
+//       <Link
+//         to="/introduction"
+//         className="absolute right-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm"
+//         onMouseEnter={() => setIsHovered(true)}
+//         onMouseLeave={() => setIsHovered(false)}
+//       >
+//         <div className="border border-gray-400 p-2 flex items-center">
+//           LET'S BEGIN <span className="ml-2">▶</span>
+//         </div>
+//       </Link>
+//     </section>
+//   );
+// };
+
+// export default Hero;
 
 
 
@@ -410,3 +415,164 @@ export default Hero;
 // };
 
 // export default Hero;
+
+
+
+
+
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+
+const Hero = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <section className="relative flex flex-col items-center justify-center h-screen bg-gray-100 overflow-hidden">
+      
+      <div className="absolute inset-0 flex items-center justify-center opacity-50">
+        <img
+          src="/images/hero-bg.png" 
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Animated Heading */}
+      <motion.h1
+        initial={{ x: 0 }}
+        animate={{ x: isHovered ? -100 : 0 }} // Move left on hover
+        transition={{ duration: 0.8 }}
+        className="text-6xl md:text-8xl font-bold text-black text-center relative"
+      >
+        Sophisticated <br />
+        <span className="underline decoration-black">Skincare</span>
+      </motion.h1>
+
+      {/* Dynamic Dotted Border */}
+
+      <div className="absolute bottom-10 w-full px-10 max-w-7xl flex justify-between text-gray-700 text-sm md:text-base">
+        <p className="w-1/6 font-semibold">
+          Premium Custom Skincare For <br /> Faces With Sophisticated Needs
+        </p>
+        <p className="w-1/6 text-center">
+         Proprietary Algorithms For <br /> Effective Formula Design
+       </p>
+       <p className="w-1/6 text-center">
+         Complete Control over <br /> Skincare Ingredients
+        </p>
+        <p className="w-1/6 text-center">
+          Expert clinical <br /> diagnostics + guidance
+       </p>
+       <p className="w-1/6 text-center">
+          Fully Customizable <br /> from Scratch
+        </p>
+        <p className="w-1/6 text-right">
+          FDA / TGA Approved <br /> Compound Pharmacies
+        </p>
+      </div>
+
+      {/* Clinical Research Section + Dotted Border */}
+      {/* <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.2 }}
+        className="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm"
+      >
+        <div className="border border-gray-400 p-2 flex items-center relative z-10 ml-4">
+          <span className="mr-3">◀</span> CLINICAL RESEARCH
+        </div>
+
+        {/* Dotted Border Around Clinical Research */}
+        {/* <div className="absolute  w-[250px] h-[250px] inset-[-10px] border border-dotted border-gray-400 rotate-90"  
+         style={{ right: "-5%", top: "30%", transform: "translateY(-50%) " }} />
+      </motion.div> */} 
+
+
+
+
+
+<motion.div
+  initial={{ opacity: 0, x: -50 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 1.2 }}
+  className="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm"
+>
+  <div className="border border-gray-400 p-2 flex items-center relative z-10  "  style={{ marginLeft: "-35px" }}>
+    <span className="mr-3">◀</span> CLINICAL RESEARCH
+  </div>
+
+  {/* Adjusted Left Dotted Border (Moved 50% Left) */}
+  <div 
+    className="absolute w-[250px] h-[250px] border border-dotted border-gray-400 rotate-90"
+    style={{ left: "-50%", top: "30%", transform: "translateY(-50%)" }} 
+  />
+</motion.div>
+
+
+
+
+      {/* Right Side Dotted Border */}
+      <motion.div
+        className="absolute w-[250px] h-[250px] border border-dotted border-gray-400 rotate-90"
+        initial={{ opacity: 1, scale: 1 }}
+        animate={{ opacity: isHovered ? 1 : 0.8, scale: isHovered ? 1.2 : 1 }}
+        transition={{ duration: 0.5 }}
+        style={{ right:"-5%", top: "30%", transform: "translateY(-50%)" }}
+      >
+        {/* Additional Dotted Borders on Hover */}
+        {isHovered && (
+          <>
+            <motion.div
+              className="absolute w-full h-full border border-dotted border-gray-400"
+              initial={{ opacity: 0, scale: 1 }}
+              animate={{ opacity: 1, scale: 1.3 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            />
+            <motion.div
+              className="absolute w-full h-full border border-dotted border-gray-400"
+              initial={{ opacity: 0, scale: 1 }}
+              animate={{ opacity: 1, scale: 1.6 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            />
+          </>
+          
+        )}
+
+
+        {isHovered&&(<motion.div
+  initial={{ opacity: 0, x: -0 }}
+  animate={{ opacity: 0, x: 0 }}
+  transition={{ duration: 1.2 }}
+  className="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm"
+>
+  <div className="border border-gray-400 p-2 flex items-center relative z-10  "  style={{ marginLeft: "-100px" }}>
+    <span className="mr-3">◀</span> CLINICAL RESEARCH
+  </div>
+
+  {/* Adjusted Left Dotted Border (Moved 50% Left) */}
+  <div 
+    className="absolute w-[250px] h-[250px] border border-dotted border-gray-400 rotate-90"
+    style={{ left: "-50%", top: "30%", transform: "translateY(-50%)" }} 
+  />
+</motion.div> )}
+
+      </motion.div>
+
+      {/* Hoverable "Let's Begin" Button */}
+      <Link
+        to="/introduction"
+        className="absolute right-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div className="border border-gray-400 p-2 flex items-center w-55">
+          LET'S BEGIN <span className="ml-2">▶</span>
+        </div>
+      </Link>
+    </section>
+  );
+};
+
+export default Hero;
+
