@@ -507,16 +507,16 @@ const Hero = () => {
   initial={{ opacity: 0, x: -50 }}
   animate={{ opacity: 1, x: 0 }}
   transition={{ duration: 1.2 }}
-  className="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm max-md:hidden"
+  className="absolute left-10 top-50% transform -translate-y-1/2 text-gray-500 text-xs max-md:hidden"
 >
-  <div className="border border-gray-400 p-2 flex items-center relative z-10  "  style={{ marginLeft: "-35px" }}>
-    <span className="mr-3">◀</span> CLINICAL RESEARCH
+  <div className="border border-gray-400 pt-2 pb-2 pl-1 pr-1 flex items-center relative z-10    "  style={{ marginLeft: "-35px", marginBottom:'5px' }}>
+    <span className="mr-1">◀</span> CLINICAL RESEARCH
   </div>
 
   {/* Adjusted Left Dotted Border (Moved 50% Left) */}
   <div 
-    className="absolute w-[250px] h-[250px] border border-dotted border-gray-400 rotate-90"
-    style={{ left: "-50%", top: "30%", transform: "translateY(-50%)" }} 
+    className="absolute w-[250px] h-[250px] border border-dotted border-gray-400 rotate-45 "
+    style={{ left: "-155%", top: "-280%", transform: "translateY(-50%)rotate:45" }} 
   />
 </motion.div>
 
@@ -525,23 +525,24 @@ const Hero = () => {
 
       {/* Right Side Dotted Border */}
       <motion.div
-        className="absolute w-[250px] h-[250px] border border-dotted border-gray-400 rotate-90 "
-        initial={{ opacity: 1, scale: 1 }}
-        animate={{ opacity: isHovered ? 1 : 0.8, scale: isHovered ? 1.2 : 1 }}
+        className="absolute w-[250px] h-[250px] border border-dotted border-gray-400   "
+        initial={{ opacity: 1, scale: 1, rotate:45 }}
+        animate={{ opacity: isHovered ? 1 : 0.8, 
+          scale: isHovered ? 1.2 : 1, rotate :45 }}
         transition={{ duration: 0.5 }}
-        style={{ right:"-5%", top: "30%", transform: "translateY(-50%)" }}
+        style={{ right:"-10%", top: "30%", transform: "translateY(-50%) rotate(45deg)" }}
       >
         {/* Additional Dotted Borders on Hover */}
         {isHovered && (
           <>
             <motion.div
-              className="absolute w-full h-full border border-dotted border-gray-400  max-sm:hidden"
+              className="absolute w-full h-full border border-dotted border-gray-400 "
               initial={{ opacity: .8, scale: 1 }}
               animate={{ opacity: 1, scale: 1.3 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             />
             <motion.div
-              className="absolute w-full h-full border border-dotted border-gray-400  max-sm:hidden"
+              className="absolute w-full h-full border border-dotted border-gray-400  "
               initial={{ opacity: 0, scale: 1 }}
               animate={{ opacity: 1, scale: 1.6 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -555,16 +556,16 @@ const Hero = () => {
   initial={{ opacity: 0, x: -0 }}
   animate={{ opacity: 0, x: 0 }}
   transition={{ duration: 1.2 }}
-  className="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm max-sm:hidden"
+  className="absolute left-10 top-50% transform -translate-y-1/2 text-gray-500  max-sm:hidden"
 >
-  <div className="border border-gray-400 p-2 flex items-center relative z-10  "  style={{ marginLeft: "-100px" }}>
+  <div className="border border-gray-400 p-2 flex items-center relative z-10  "  style={{ marginLeft: "-100px"   }}>
     <span className="mr-3">◀</span> CLINICAL RESEARCH
   </div>
 
   {/* Adjusted Left Dotted Border (Moved 50% Left) */}
   <div 
-    className="absolute w-[250px] h-[250px] border border-dotted border-gray-400 rotate-90  max-sm:hidden"
-    style={{ left: "-50%", top: "30%", transform: "translateY(-50%)" }} 
+    className="absolute w-[250px] h-[250px] border border-dotted border-gray-400 rotate-45"
+    style={{ left: "-50%", top: "30%", transform: "translateY(-50%)rotate:45" }} 
   />
 </motion.div> )}
 
@@ -573,13 +574,13 @@ const Hero = () => {
       {/* Hoverable "Let's Begin" Button */}
       <Link
         to="/introduction"
-        className="absolute right-10 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm "
+        className="absolute right-5 top-[48%] transform -translate-y-1/2 text-gray-500 text-sm "
         onMouseEnter={() => isLargeScreen && setIsHovered(true)} 
   
         onMouseLeave={() => isLargeScreen && setIsHovered(false)}
       >
 
-        <div className="border border-gray-400 p-2 flex items-center w-55">
+        <div className="border border-gray-400 p-2 flex items-center w-55 ">
           LET'S BEGIN <span className="ml-2">▶</span>
         </div>
       </Link>
