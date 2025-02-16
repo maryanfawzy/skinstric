@@ -1,10 +1,27 @@
+
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HeaderIntroduction from "../components/HeaderIntroduction";
+
+const API_URL = "https://wk7wmfz7x8.execute-api.us-east-2.amazonaws.com/live/FES_Virtual_Internship_1/level2";
 
 const Introduction = () => {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({ name: "", location: "" });
+  const [formData, setFormData] = useState(() => {
+    // Load saved data from localStorage (if available)
+    return {
+      name: localStorage.getItem("name") || "",
+      location: localStorage.getItem("location") || "",
+    };
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    // Save form data to localStorage on every change
+    localStorage.setItem("name", formData.name);
+    localStorage.setItem("location", formData.location);
+  }, [formData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,6 +31,38 @@ const Introduction = () => {
     if (step === 1 && formData.name.trim() === "") return;
     if (step === 2 && formData.location.trim() === "") return;
     setStep(step + 1);
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit data.");
+      }
+
+      console.log("Data submitted successfully:", formData);
+      alert("Data submitted successfully!");
+
+      // Clear localStorage after successful submission
+      localStorage.removeItem("name");
+      localStorage.removeItem("location");
+
+    } catch (err) {
+      setError("Error submitting data. Please try again.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -47,7 +96,7 @@ const Introduction = () => {
           {step === 1 ? "Introduce yourself" : "Where are you from?"}
         </h1>
 
-        <motion.div className="relative w-full max-w-[250px] bg-transparent border-b-2 border-black text-center text-4xl font-semibold p-2 focus:outline-none z-50 max-md:max-w-[150px] ">
+        <motion.div className="relative w-full max-w-[250px] bg-transparent border-b-2 border-black text-center text-4xl font-semibold p-2 focus:outline-none z-50 max-md:max-w-[150px]">
           <input
             type="text"
             name={step === 1 ? "name" : "location"}
@@ -94,14 +143,18 @@ const Introduction = () => {
       {/* Start Analysis Button */}
       {step === 2 && (
         <button
-          onClick={() => console.log("Submitting data:", formData)}
+          onClick={handleSubmit}
+          disabled={loading}
           className="absolute bottom-10 right-10 text-black flex items-center space-x-2"
         >
           <div className="border border-black p-2 flex items-center">
-            <span className="mr-2">START ANALYSIS</span> ▶
+            {loading ? <span className="mr-2">LOADING...</span> : <span className="mr-2">START ANALYSIS</span>} ▶
           </div>
         </button>
       )}
+
+      {/* Error Message */}
+      {error && <p className="text-red-500 mt-4">{error}</p>}
     </div>
   );
 };
@@ -109,15 +162,18 @@ const Introduction = () => {
 export default Introduction;
 
 // import { motion } from "framer-motion";
-// import { div } from "framer-motion/client";
 // import { useState } from "react";
 // import HeaderIntroduction from "../components/HeaderIntroduction";
 
-// const Introduction = () => {
-//   const [step, setStep] = useState(1); // Track which step the user is on
-//   const [formData, setFormData] = useState({ name: "", location: "" });
+// const API_URL = "https://wk7wmfz7x8.execute-api.us-east-2.amazonaws.com/live/FES_Virtual_Internship_1/level2";
 
-//   const handleChange = (e) => {
+// const Introduction = () => {
+//   const [step, setStep] = useState(1);
+//   const [formData, setFormData] = useState({ name: "", location: "" });
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState("");
+
+//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 //     setFormData({ ...formData, [e.target.name]: e.target.value });
 //   };
 
@@ -127,9 +183,37 @@ export default Introduction;
 //     setStep(step + 1);
 //   };
 
-//   return (
+//   const handleSubmit = async () => {
+//     setLoading(true);
+//     setError("");
 
+//     try {
+//       const response = await fetch(API_URL, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(formData),
+//       });
+
+//       if (!response.ok) {
+//         throw new Error("Failed to submit data.");
+//       }
+
+//       console.log("Data submitted successfully:", formData);
+//       alert("Data submitted successfully!");
+//     } catch (err) {
+//       setError("Error submitting data. Please try again.");
+//       console.error(err);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
 //     <div className="relative flex flex-col items-center justify-center min-h-screen bg-white px-6 md:px-16 py-20">
+//       <HeaderIntroduction />
+
 //       {/* Back Button */}
 //       {step > 1 && (
 //         <button
@@ -144,7 +228,7 @@ export default Introduction;
 
 //       {/* Title Section */}
 //       <motion.div
-//         key={step} // This ensures animations restart on step change
+//         key={step}
 //         initial={{ opacity: 0, y: 50 }}
 //         animate={{ opacity: 1, y: 0 }}
 //         transition={{ duration: 1 }}
@@ -157,23 +241,19 @@ export default Introduction;
 //           {step === 1 ? "Introduce yourself" : "Where are you from?"}
 //         </h1>
 
-//         <motion.div
-//           type="text"
-//           placeholder="Enter Your Name"
-//           onChange={handleChange}
-//           className=" relative w-full max-w-[250px] bg-transparent border-b-2 border-black text-center text-4xl font-semibold p-2 focus:outline-none z-50 max-md:max-w-[150px] "
-//         >
+//         <motion.div className="relative w-full max-w-[250px] bg-transparent border-b-2 border-black text-center text-4xl font-semibold p-2 focus:outline-none z-50 max-md:max-w-[150px]">
 //           <input
 //             type="text"
 //             name={step === 1 ? "name" : "location"}
 //             placeholder={step === 1 ? "Enter your name" : "Enter your location"}
 //             value={step === 1 ? formData.name : formData.location}
 //             onChange={handleChange}
-//             className="w-full bg-transparent border-black text-center text-2xl p-2 focus:outline-none  max-sm:text-xl"
+//             className="w-full bg-transparent border-black text-center text-2xl p-2 focus:outline-none max-md:text-xl max-sm:text-sm"
 //           />
 //         </motion.div>
 //       </motion.div>
 
+//       {/* Rotating Borders */}
 //       <motion.div
 //         className="absolute w-[400px] h-[400px] border border-dotted border-gray-800 rotate-45 max-md:w-[300px] max-md:h-[300px]"
 //         initial={{ scale: 0.8, rotate: 45 }}
@@ -197,27 +277,34 @@ export default Introduction;
 //       {step < 2 && (
 //         <button
 //           onClick={handleNext}
-//           className="absolute bottom-10 right-10 text-black flex items-center space-x-2 "
+//           className="absolute bottom-10 right-10 text-black flex items-center space-x-2"
 //         >
-//           <div className="border border-black p-2 flex items-center ">
+//           <div className="border border-black p-2 flex items-center">
 //             <span className="mr-2">PROCEED</span> ▶
 //           </div>
 //         </button>
 //       )}
 
-//       {/* Start Analysis Button  */}
+//       {/* Start Analysis Button */}
 //       {step === 2 && (
 //         <button
-//           onClick={() => console.log("Submitting data:", formData)}
+//           onClick={handleSubmit}
+//           disabled={loading}
 //           className="absolute bottom-10 right-10 text-black flex items-center space-x-2"
 //         >
 //           <div className="border border-black p-2 flex items-center">
-//             <span className="mr-2">START ANALYSIS</span> ▶
+//             {loading ? <span className="mr-2">LOADING...</span> : <span className="mr-2">START ANALYSIS</span>} ▶
 //           </div>
 //         </button>
 //       )}
+
+//       {/* Error Message */}
+//       {error && <p className="text-red-500 mt-4">{error}</p>}
 //     </div>
 //   );
 // };
 
 // export default Introduction;
+
+
+
