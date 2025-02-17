@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import HeaderIntroduction from "../components/HeaderIntroduction";
 
-const API_URL = "https://wk7wmfz7x8.execute-api.us-east-2.amazonaws.com/live/FES_Virtual_Internship_1/level2";
+const API_URL = "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseOne";
 
 const Introduction = () => {
   const [step, setStep] = useState(1);
@@ -33,10 +33,12 @@ const Introduction = () => {
     setStep(step + 1);
   };
 
+
+
   const handleSubmit = async () => {
     setLoading(true);
     setError("");
-
+  
     try {
       const response = await fetch(API_URL, {
         method: "POST",
@@ -45,25 +47,60 @@ const Introduction = () => {
         },
         body: JSON.stringify(formData),
       });
-
+  
+      const responseData = await response.json(); // Try to parse JSON response
+      console.log("API Response:", responseData);
+  
       if (!response.ok) {
-        throw new Error("Failed to submit data.");
+        throw new Error(`API Error: ${responseData.message || "Unknown error"}`);
       }
-
+  
       console.log("Data submitted successfully:", formData);
       alert("Data submitted successfully!");
-
+  
       // Clear localStorage after successful submission
       localStorage.removeItem("name");
       localStorage.removeItem("location");
-
+  
     } catch (err) {
+      console.error("Error submitting data:", err);
       setError("Error submitting data. Please try again.");
-      console.error(err);
     } finally {
       setLoading(false);
     }
   };
+
+  // const handleSubmit = async () => {
+  //   setLoading(true);
+  //   setError("");
+
+  //   try {
+  //     const response = await fetch(API_URL, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to submit data.");
+  //     }
+
+  //     console.log("Data submitted successfully:", formData);
+  //     alert("Data submitted successfully!");
+
+  //     // Clear localStorage after successful submission
+  //     localStorage.removeItem("name");
+  //     localStorage.removeItem("location");
+
+  //   } catch (err) {
+  //     setError("Error submitting data. Please try again.");
+  //     console.error(err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-white px-6 md:px-16 py-20">
