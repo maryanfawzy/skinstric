@@ -4,6 +4,12 @@ import Introduction from "./pages/Introduction";
 import Result from "./pages/Result";
 import Select from "./pages/Select";
 import Demographic from "./pages/Demographic";
+import ReactDOM from 'react-dom'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fab, faCheckSquare, faCoffee)
 
 
 
