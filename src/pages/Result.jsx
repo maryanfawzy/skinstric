@@ -159,7 +159,7 @@ const Result = () => {
             className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center"
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1  }}
           >
             <label className="cursor-pointer flex flex-col items-center">
               <img src="/icons/gallery.svg" alt="Gallery Icon" className="w-10 h-10" />
