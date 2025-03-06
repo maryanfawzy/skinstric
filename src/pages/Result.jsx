@@ -137,16 +137,16 @@ const Result = () => {
         {/* Left - Camera Scan (Navigates to /scan) */}
         <div className="relative flex flex-col items-center justify-center">
           <motion.div
-            className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center cursor-pointer"
+            className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center cursor-pointer  max-md:w-[200px] max-md:h-[200px] max-sm:w-[150px] max-sm:h-[150px]"
             initial={{ scale: 0.9 }}
             animate={{ scale: 1, rotate: [360, 50] }}
             transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
             onClick={() => navigate("/scan")} // 🔥 Navigates to scan page
           >
-            <motion.div className="w-[250px] h-[250px] border border-gray-600 rotate-45 flex items-center justify-center"
+            <motion.div className="w-[250px] h-[250px] border border-gray-600 rotate-45 flex items-center justify-center  max-md:w-[150px] max-md:h-[150px] max-sm:w-[100px] max-sm:h-[100px]"
               initial={{ scale: 0.9, rotate: 45 }} 
               animate={{ scale: 1, rotate:[45, 405] }} transition={{ duration: 30, repeat:Infinity, ease:"linear" }}>
-              <motion.div className="w-[200px] h-[200px] border border-gray-400 rotate-45 flex items-center justify-center"
+              <motion.div className="w-[200px] h-[200px] border border-gray-400 rotate-45 flex items-center justify-center max-md:w-[100px] max-md:h-[100px]  max-sm:w-[50px] max-sm:h-[50px]"
                 initial={{ scale: 0.9 }}
                  animate={{ scale: 1 }} 
                  transition={{ duration: 1.5 }}>
@@ -164,19 +164,19 @@ const Result = () => {
 {/* Right - Gallery Upload */}
 <div className="relative flex flex-col items-center justify-center">
   <motion.div
-    className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center cursor-pointer"
+    className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center cursor-pointer   max-md:w-[200px] max-md:h-[200px] max-sm:w-[150px] max-sm:h-[150px]"
     initial={{ scale: 0.9 }}
     animate={{ scale: 1, rotate: [360, 50] }}
     transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
   >
     <motion.div
-      className="w-[250px] h-[250px] border border-gray-600 rotate-45 flex items-center justify-center"
+      className="w-[250px] h-[250px] border border-gray-600 rotate-45 flex items-center justify-center   max-md:w-[150px] max-md:h-[150px] max-sm:w-[100px] max-sm:h-[100px]"
       initial={{ scale: 0.9, rotate:45}}
       animate={{ scale: 1, rotate: [45, 405]}}
       transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
     >
       <motion.div
-        className="w-[200px] h-[200px] border border-gray-400 rotate-45 flex items-center justify-center"
+        className="w-[200px] h-[200px] border border-gray-400 rotate-45 flex items-center justify-center  max-md:w-[100px] max-md:h-[100px]  max-sm:w-[50px] max-sm:h-[50px]"
         initial={{ scale:0.9 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
