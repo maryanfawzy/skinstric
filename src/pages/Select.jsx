@@ -17,17 +17,9 @@ const Select = () => {
         <p className="text-sm text-gray-500">Fix estimated information if needed.</p>
       </div>
 
-      {/* Main Selection Grid */}
-      <div className="grid grid-cols-3 gap-6">
-        {/* Demographics (Clickable) */}
-        {/* <motion.div
-          className="bg-gray-100 w-40 h-40 flex items-center justify-center rotate-45 cursor-pointer shadow-lg"
-          whileHover={{ scale: 1.1 }}
-          onClick={() => navigate("/demographic")}
-        >
-          <span className="rotate-[-45deg] text-sm font-semibold">Demographics</span>
-        </motion.div> */}
-
+      
+      {/* <div className="grid grid-cols-3 gap-6">
+        
 <motion.div
   className="bg-gray-100 w-40 h-40 flex items-center justify-center rotate-45 cursor-pointer shadow-lg"
   onClick={() => navigate("/demographic")}
@@ -38,29 +30,65 @@ const Select = () => {
   <span className="rotate-[-45deg] text-sm font-semibold">Demographics</span>
 </motion.div>
 
-        {/* Cosmetic Concerns */}
         <motion.div
           className="bg-gray-100 w-40 h-40 flex items-center justify-center rotate-45 shadow-lg"
         >
           <span className="rotate-[-45deg] text-sm font-semibold">Cosmetic Concerns</span>
         </motion.div>
 
-        {/* Skin Type Details */}
         <motion.div
           className="bg-gray-100 w-40 h-40 flex items-center justify-center rotate-45 shadow-lg"
         >
           <span className="rotate-[-45deg] text-sm font-semibold">Skin Type Details</span>
         </motion.div>
 
-        {/* Weather */}
         <motion.div
           className="bg-gray-100 w-40 h-40 flex items-center justify-center rotate-45 shadow-lg"
         >
           <span className="rotate-[-45deg] text-sm font-semibold">Weather</span>
         </motion.div>
-      </div>
+      </div> */}
 
-      {/* Back & Home Buttons */}
+
+
+<div className="relative flex items-center justify-center h-[400px] w-[400px]">
+  {/* Demographics (Top) */}
+  <motion.div
+    className="bg-gray-100 w-40 h-40 flex items-center justify-center absolute top-0 rotate-45 cursor-pointer shadow-lg"
+    onClick={() => navigate("/demographic")}
+    whileHover={{ rotate: 0 }}
+    transition={{ duration: 0.3 }}
+    animate={{ rotate: 45 }}
+  >
+    <span className="rotate-[-45deg] text-sm font-semibold">Demographics</span>
+  </motion.div>
+
+  {/* Cosmetic Concerns (Right) */}
+  <motion.div
+    className="bg-gray-100 w-40 h-40 flex items-center justify-center absolute right-0 rotate-45 shadow-lg"
+  >
+    <span className="rotate-[-45deg] text-sm font-semibold">Cosmetic Concerns</span>
+  </motion.div>
+
+  {/* Skin Type Details (Left) */}
+  <motion.div
+    className="bg-gray-100 w-40 h-40 flex items-center justify-center absolute left-0 rotate-45 shadow-lg"
+  >
+    <span className="rotate-[-45deg] text-sm font-semibold">Skin Type Details</span>
+  </motion.div>
+
+  {/* Weather (Bottom) */}
+  <motion.div
+    className="bg-gray-100 w-40 h-40 flex items-center justify-center absolute bottom-0 rotate-45 shadow-lg"
+  >
+    <span className="rotate-[-45deg] text-sm font-semibold">Weather</span>
+  </motion.div>
+</div>
+
+
+
+
+    
       <div className="absolute bottom-10 left-10">
         <Link to="/result" className="border border-black p-2 flex items-center">
           ◀ <span className="ml-2">Back</span>
