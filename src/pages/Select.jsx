@@ -20,13 +20,23 @@ const Select = () => {
       {/* Main Selection Grid */}
       <div className="grid grid-cols-3 gap-6">
         {/* Demographics (Clickable) */}
-        <motion.div
+        {/* <motion.div
           className="bg-gray-100 w-40 h-40 flex items-center justify-center rotate-45 cursor-pointer shadow-lg"
           whileHover={{ scale: 1.1 }}
           onClick={() => navigate("/demographic")}
         >
           <span className="rotate-[-45deg] text-sm font-semibold">Demographics</span>
-        </motion.div>
+        </motion.div> */}
+
+<motion.div
+  className="bg-gray-100 w-40 h-40 flex items-center justify-center rotate-45 cursor-pointer shadow-lg"
+  onClick={() => navigate("/demographic")}
+  whileHover={{ rotate:0}}
+  transition={{ duration: 0.3 }} 
+  animate={{ rotate: 45 }}
+>
+  <span className="rotate-[-45deg] text-sm font-semibold">Demographics</span>
+</motion.div>
 
         {/* Cosmetic Concerns */}
         <motion.div

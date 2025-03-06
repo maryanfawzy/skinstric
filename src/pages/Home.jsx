@@ -139,3 +139,4 @@
 // };
 
 // export default Result;
+// https://skintric.vercel.app/

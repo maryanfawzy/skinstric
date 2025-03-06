@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+import ScanPage from "./pages/ScanPage";
 
 library.add(fab, faCheckSquare, faCoffee)
 
@@ -30,6 +31,8 @@ function App() {
         <Route path="/result" element={<Result />} /> {/* New route for the result page */}
         <Route path="/select" element={<Select />} />
         <Route path="/demographic" element={<Demographic />} /> {/* Optional */}
+        <Route path="/scan" element={<ScanPage />} />
+
 
         
       </Routes>
