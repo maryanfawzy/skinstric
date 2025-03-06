@@ -25,7 +25,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HeaderIntroduction from "../components/HeaderIntroduction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { faCamera, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { FaUpload } from "react-icons/fa";
+
 
 const API_URL = "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo";
 
@@ -119,8 +121,8 @@ const Result = () => {
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-white px-6 md:px-16 py-20 overflow-hidden">
       <HeaderIntroduction />
 
-      {/* Background Dotted Border Animation (Kept the Same) */}
-      <motion.div className="absolute w-[400px] h-[400px] border border-dotted border-gray-400 rotate-45"
+
+      {/* <motion.div className="absolute w-[400px] h-[400px] border border-dotted border-gray-400 rotate-45"
         initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1, rotate: 360 }}
         transition={{ duration: 8, repeat: Infinity, ease: "linear" }} />
       <motion.div className="absolute w-[500px] h-[500px] border border-dotted border-gray-400 rotate-45"
@@ -128,7 +130,7 @@ const Result = () => {
         transition={{ duration: 10, repeat: Infinity, ease: "linear" }} />
       <motion.div className="absolute w-[600px] h-[600px] border border-dotted border-gray-400 rotate-45"
         initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1, rotate: 360 }}
-        transition={{ duration: 12, repeat: Infinity, ease: "linear" }} />
+        transition={{ duration: 12, repeat: Infinity, ease: "linear" }} /> */}
 
       {/* AI Scan & Gallery Upload Section */}
       <div className="flex gap-20 mt-20">
@@ -137,14 +139,17 @@ const Result = () => {
           <motion.div
             className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center cursor-pointer"
             initial={{ scale: 0.9 }}
-            animate={{ scale: 1, rotate: 360 }}
+            animate={{ scale: 1, rotate: [360, 50] }}
             transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
             onClick={() => navigate("/scan")} // 🔥 Navigates to scan page
           >
             <motion.div className="w-[250px] h-[250px] border border-gray-600 rotate-45 flex items-center justify-center"
-              initial={{ scale: 0.9 }} animate={{ scale: 1 }} transition={{ duration: 1.2 }}>
+              initial={{ scale: 0.9, rotate: 45 }} 
+              animate={{ scale: 1, rotate:[45, 405] }} transition={{ duration: 30, repeat:Infinity, ease:"linear" }}>
               <motion.div className="w-[200px] h-[200px] border border-gray-400 rotate-45 flex items-center justify-center"
-                initial={{ scale: 0.9 }} animate={{ scale: 1 }} transition={{ duration: 1.5 }}>
+                initial={{ scale: 0.9 }}
+                 animate={{ scale: 1 }} 
+                 transition={{ duration: 1.5 }}>
                 {/* ✅ Camera Icon Fixed */}
                 <FontAwesomeIcon icon={faCamera} className="w-10 h-10 absolute text-black" />
               </motion.div>
@@ -155,19 +160,50 @@ const Result = () => {
           </p>
         </div>
 
-        {/* Right - Gallery Upload */}
-        <div className="relative flex flex-col items-center justify-center">
-          <motion.div className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center"
-            initial={{ scale: 0.9 }} animate={{ scale: 1 }} transition={{ duration: 1 }}>
-            <label className="cursor-pointer flex flex-col items-center">
-              <img src="/icons/gallery.svg" alt="Gallery Icon" className="w-10 h-10" />
-              <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
-              <p className="mt-4 text-center text-sm font-semibold">
-                ALLOW A.I. <br /> ACCESS GALLERY
-              </p>
-            </label>
-          </motion.div>
-        </div>
+
+{/* Right - Gallery Upload */}
+<div className="relative flex flex-col items-center justify-center">
+  <motion.div
+    className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center cursor-pointer"
+    initial={{ scale: 0.9 }}
+    animate={{ scale: 1, rotate: [360, 50] }}
+    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+  >
+    <motion.div
+      className="w-[250px] h-[250px] border border-gray-600 rotate-45 flex items-center justify-center"
+      initial={{ scale: 0.9, rotate:45}}
+      animate={{ scale: 1, rotate: [45, 405]}}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+    >
+      <motion.div
+        className="w-[200px] h-[200px] border border-gray-400 rotate-45 flex items-center justify-center"
+        initial={{ scale:0.9 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+      >
+        {/* ✅ Gallery Icon Fixed */}
+        <label className="cursor-pointer flex flex-col items-center">
+
+
+        <FontAwesomeIcon icon={faUpload} alt="Gallery Icon" className="w-10 h-10 absolute text-black" />   
+
+
+          <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+        </label>
+      </motion.div>
+    </motion.div>
+  </motion.div>
+  <p className="mt-4 text-center text-sm font-semibold">
+    ALLOW A.I. <br /> ACCESS GALLERY
+  </p>
+</div>
+
+
+
+
+
+
+
       </div>
 
       {/* Image Preview */}
