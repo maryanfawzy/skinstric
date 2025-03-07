@@ -30,6 +30,7 @@ function App() {
         <Route path="/introduction" element={<Introduction />} />
         <Route path="/result" element={<Result />} /> {/* New route for the result page */}
         <Route path="/select" element={<Select />} />
+
         <Route path="/demographic" element={<Demographic />} /> {/* Optional */}
         <Route path="/scan" element={<ScanPage />} />
 

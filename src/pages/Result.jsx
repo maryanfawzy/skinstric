@@ -18,6 +18,16 @@ const Result = () => {
   const canvasRef = useRef(null);
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+    setImageData(null);
+    setPreviewImage(null);
+    localStorage.removeItem("capturedPhoto");
+  }, []);
+  
+
+
+
   useEffect(() => {
     const savedImage = localStorage.getItem("capturedImage");
     if (savedImage) {
@@ -83,6 +93,10 @@ const Result = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
+  
+   
+    
+
     if (video && canvas) {
       // Ensure the video is playing before capturing
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -104,38 +118,132 @@ const Result = () => {
   };
 
   // ✅ Handle Image Submission to API
-  const handleProcess = async () => {
-    if (!imageData) {
-      setError("Please upload or capture an image first.");
-      return;
+//   const handleProcess = async () => {
+//     if (!imageData) {
+//       setError("Please upload or capture an image first.");
+      
+
+//       return;
+
+//     }
+    
+//     setLoading(true);
+//     setError("");
+//     console.log("✅ Navigating to Select Page...");
+// navigate("/select");
+
+
+//     const requestData = { image: imageData };
+
+//     try {
+//       const response = await fetch(API_URL, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(requestData),
+//       });
+
+//       const result = await response.json();
+
+//       if (!response.ok || !result.data) {
+//         throw new Error(result.message || "Invalid response from API");
+//       }
+
+//       localStorage.setItem("aiAnalysis", JSON.stringify(result.data));
+
+// setImageData(null);
+// setPreviewImage(null)
+// localStorage.removeItem('capturedPhoto')
+
+
+//       navigate("/select");
+//     } catch (err) {
+//       setError("Failed to process image. Please try again.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+
+const handleProcess = async () => {
+  if (!imageData) {
+    setError("Please upload an image first.");
+    console.error("❌ No image data found.");
+    return;
+  }
+
+  setLoading(true);
+  setError("");
+
+  const requestData = { image: imageData };
+
+  console.log("📤 Sending request to API:", API_URL);
+  console.log("📝 Request Payload:", JSON.stringify(requestData, null, 2));
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestData),
+    });
+
+    const result = await response.json();
+    console.log("✅ API Response:", result);
+
+    if (!response.ok || !result.data) {
+      throw new Error(result.message || "Invalid response from API");
     }
 
-    setLoading(true);
-    setError("");
+    localStorage.setItem("aiAnalysis", JSON.stringify(result.data));
 
-    const requestData = { image: imageData };
+    // ✅ Clear Image Data Completely
+    setImageData(null);
+    setPreviewImage(null);
+    localStorage.removeItem("capturedPhoto");
 
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestData),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.data) {
-        throw new Error(result.message || "Invalid response from API");
-      }
-
-      localStorage.setItem("aiAnalysis", JSON.stringify(result.data));
+    // ✅ Small Delay to Ensure Cleanup Before Navigation
+    setTimeout(() => {
       navigate("/select");
-    } catch (err) {
-      setError("Failed to process image. Please try again.");
-    } finally {
-      setLoading(false);
+    }, 200); 
+
+  } catch (err) {
+    console.error("❌ API Error:", err);
+    setError("Failed to process image. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
+
+
+
+  useEffect(() => {
+    // Load captured photo if available
+    const savedPhoto = localStorage.getItem("capturedPhoto");
+    if (savedPhoto) {
+      setPreviewImage(savedPhoto);
     }
-  };
+  
+    return () => {
+      console.log(" Cleaning up captured image on page leave...");
+      setPreviewImage(null);
+      localStorage.removeItem("capturedPhoto");
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(" Clearing stored image on page load...");
+    
+    //  Remove the correct localStorage key
+    localStorage.removeItem("capturedImage");  
+  
+    //  Clear state variables
+    setPreviewImage(null);
+    setImageData(null);
+  }, []);
+  
+  
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-white px-6 md:px-16 py-20 overflow-hidden">
@@ -193,12 +301,31 @@ const Result = () => {
       </div>
 
       {/* Image Preview */}
-      {previewImage && <img src={previewImage} alt="Uploaded Preview" className="mt-6 w-40 h-40 rounded-lg shadow-lg" />}
+      {/* {previewImage && <img src={previewImage} alt="Uploaded Preview" className="mt-6 w-40 h-40 rounded-lg shadow-lg" />} */}
+
+      {previewImage && imageData && (
+  <img src={previewImage} alt="Uploaded Preview" className="mt-6 w-40 h-40 rounded-lg shadow-lg" />
+)}
+
 
       {/* Process Button */}
-      <button onClick={handleProcess} disabled={loading} className="absolute bottom-10 right-10 text-black flex items-center space-x-2">
+      {/* <button onClick={handleProcess} disabled={loading} className="absolute bottom-10 right-10 text-black flex items-center space-x-2">
         <div className="border border-black p-2 flex items-center">{loading ? "PROCESSING..." : "PROCESS"} ▶</div>
-      </button>
+      </button> */}
+
+<button 
+  onClick={() => {
+    handleProcess();  // Calls the function as usual
+    setTimeout(() => navigate("/select"), 2000);  // Navigates to select after 2s
+  }} 
+  disabled={loading} 
+  className="absolute bottom-10 right-10 text-black flex items-center space-x-2"
+>
+  <div className="border border-black p-2 flex items-center">
+    {loading ? "PROCESSING..." : "PROCESS"} ▶
+  </div>
+</button>
+
 
       {error && <p className="text-red-500 mt-4">{error}</p>}
     </div>

@@ -1,8 +1,22 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import HeaderIntroduction from "../components/HeaderIntroduction";
+import { useEffect } from "react";
+
+
+
+
+
 
 const Demographic = () => {
+  useEffect(() => {
+    return () => {
+      console.log("🚀 Clearing all stored data when leaving the Demographics Page...");
+      localStorage.removeItem("aiAnalysis"); // Clear API response
+      localStorage.removeItem("capturedPhoto"); // Clear the captured photo
+    };
+  }, []);
+
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-white px-6 md:px-16 py-20">
       {/* Header */}
