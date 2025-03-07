@@ -129,7 +129,7 @@ const Result = () => {
       }
 
       localStorage.setItem("aiAnalysis", JSON.stringify(result.data));
-      navigate("/demographic");
+      navigate("/select");
     } catch (err) {
       setError("Failed to process image. Please try again.");
     } finally {
