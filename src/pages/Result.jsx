@@ -29,12 +29,24 @@ const Result = () => {
 
 
   useEffect(() => {
+    console.log("🚀 Page loaded, checking for existing images...");
+  
+    // ✅ Load saved image if available
     const savedImage = localStorage.getItem("capturedImage");
     if (savedImage) {
       setPreviewImage(savedImage);
       setImageData(savedImage.split(",")[1]); // Extract Base64
     }
+  
+    // ✅ Cleanup function: Only remove image when leaving the page
+    return () => {
+      console.log("🧹 Cleaning up stored image on page leave...");
+      localStorage.removeItem("capturedImage");
+      setPreviewImage(null);
+      setImageData(null);
+    };
   }, []);
+  
 
   // ✅ Handle Image Upload
   const handleImageUpload = (event) => {
@@ -117,51 +129,6 @@ const Result = () => {
     }
   };
 
-  // ✅ Handle Image Submission to API
-//   const handleProcess = async () => {
-//     if (!imageData) {
-//       setError("Please upload or capture an image first.");
-      
-
-//       return;
-
-//     }
-    
-//     setLoading(true);
-//     setError("");
-//     console.log("✅ Navigating to Select Page...");
-// navigate("/select");
-
-
-//     const requestData = { image: imageData };
-
-//     try {
-//       const response = await fetch(API_URL, {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify(requestData),
-//       });
-
-//       const result = await response.json();
-
-//       if (!response.ok || !result.data) {
-//         throw new Error(result.message || "Invalid response from API");
-//       }
-
-//       localStorage.setItem("aiAnalysis", JSON.stringify(result.data));
-
-// setImageData(null);
-// setPreviewImage(null)
-// localStorage.removeItem('capturedPhoto')
-
-
-//       navigate("/select");
-//     } catch (err) {
-//       setError("Failed to process image. Please try again.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
 
 
 const handleProcess = async () => {
@@ -283,35 +250,62 @@ const handleProcess = async () => {
           <p className="mt-4 text-center text-sm font-semibold">ALLOW A.I. <br /> TO SCAN YOUR FACE</p>
         </div>
 
-        {/* Right - Gallery Upload */}
+
+
         <div className="relative flex flex-col items-center justify-center">
-          <motion.div
-            className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center cursor-pointer"
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1, rotate: [360, 50] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-          >
-            <label className="cursor-pointer flex flex-col items-center">
-              <FontAwesomeIcon icon={faUpload} alt="Gallery Icon" className="w-10 h-10 absolute text-black" />
-              <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
-            </label>
-          </motion.div>
-          <p className="mt-4 text-center text-sm font-semibold">ALLOW A.I. <br /> ACCESS GALLERY</p>
-        </div>
+  <motion.div
+    className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center cursor-pointer"
+    initial={{ scale: 0.9 }}
+    animate={{ scale: 1, rotate: [360, 50] }}
+    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+  >
+    <motion.div
+      className="w-[250px] h-[250px] border border-gray-600 rotate-45 flex items-center justify-center"
+      initial={{ scale: 0.9, rotate: 45 }}
+      animate={{ scale: 1, rotate: [45, 405] }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+    >
+      <motion.div className="w-[200px] h-[200px] border border-gray-400 rotate-45 flex items-center justify-center">
+       
+        <label className="cursor-pointer flex flex-col items-center">
+          <FontAwesomeIcon icon={faUpload} className="w-10 h-10 absolute text-black" />
+          <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+        </label>
+      </motion.div>
+    </motion.div>
+  </motion.div>
+  <p className="mt-4 text-center text-sm font-semibold">ALLOW A.I. <br /> ACCESS GALLERY</p>
+</div>
+
+
+      
+ {/* <div className="relative flex flex-col items-center justify-center">
+  <motion.div
+    className="w-[300px] h-[300px] border border-gray-800 rotate-45 flex items-center justify-center cursor-pointer"
+    initial={{ scale: 0.9 }}
+    animate={{ scale: 1, rotate: [360, 50] }}
+    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+  >
+    <motion.div
+      className="w-[250px] h-[250px] border border-gray-600 rotate-45 flex items-center justify-center"
+      initial={{ scale: 0.9, rotate: 45 }}
+      animate={{ scale: 1, rotate: [45, 405] }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+    >
+      <motion.div className="w-[200px] h-[200px] border border-gray-400 rotate-45 flex items-center justify-center">
+        <FontAwesomeIcon icon={faUpload} className="w-10 h-10 absolute text-black" />
+      </motion.div>
+    </motion.div>
+  </motion.div>
+  <p className="mt-4 text-center text-sm font-semibold">ALLOW A.I. <br /> ACCESS GALLERY</p>
+</div> */}
       </div>
 
-      {/* Image Preview */}
-      {/* {previewImage && <img src={previewImage} alt="Uploaded Preview" className="mt-6 w-40 h-40 rounded-lg shadow-lg" />} */}
-
-      {previewImage && imageData && (
-  <img src={previewImage} alt="Uploaded Preview" className="mt-6 w-40 h-40 rounded-lg shadow-lg" />
-)}
-
-
-      {/* Process Button */}
-      {/* <button onClick={handleProcess} disabled={loading} className="absolute bottom-10 right-10 text-black flex items-center space-x-2">
-        <div className="border border-black p-2 flex items-center">{loading ? "PROCESSING..." : "PROCESS"} ▶</div>
-      </button> */}
+{previewImage && (
+        <div className="mt-6">
+          <img src={previewImage} alt="Uploaded Preview" className="w-40 h-40 rounded-lg shadow-lg" />
+        </div>
+      )}
 
 <button 
   onClick={() => {
